@@ -23,6 +23,8 @@ EditorConfig helps developers define and maintain consistent coding styles betwe
 Additionally, it helps minimizing redundent whitespace diffs in version control systems, which are simply caused by differences
 in editor settings.
 
+To maintain consistency, each repository should contain an `.editorconfig` file identical to the one in this repo, at its root.
+
 Editorconfig plugins are available for all major IDEs and text editors:
 - [WebStorm](https://www.jetbrains.com/help/webstorm/2016.1/configuring-code-style.html#editorconfig)
 - [InteliJ IDEA](https://www.jetbrains.com/help/idea/2016.1/code-style.html#EditorConfig)
@@ -32,5 +34,4 @@ Editorconfig plugins are available for all major IDEs and text editors:
 - [Brackets](https://github.com/kidwm/brackets-editorconfig/): https://github.com/kidwm/brackets-editorconfig/
 - [Sublime Text](https://github.com/sindresorhus/editorconfig-sublime): https://github.com/sindresorhus/editorconfig-sublime
 - [Notepad++](https://github.com/editorconfig/editorconfig-notepad-plus-plus): https://github.com/editorconfig/editorconfig-notepad-plus-plus
-
 
