@@ -1,0 +1,49 @@
+[init]
+  ## Templates directory (for git hooks, etc)
+  # templatedir = ~/.git_template
+
+[core]
+  excludesfile = ~/.gitignore
+
+  ## Handle line endings
+  # autocrlf = input # Use this on linux/mac
+  # autocrlf = true # Use this on windows
+
+  ## Only show messages in a pager if longer than one screen
+  pager = less -+F -+X
+
+[branch]
+  ## Default all new branches to fetch and rebase - not merge
+  autosetuprebase = always
+
+[merge]
+  ## Make all merges no-ff
+  # ff = false
+  
+[pull]
+  ## Default pulls to fetch and rebase - not merge
+  rebase = true
+
+[push]
+  ## Limit `push` to only pushing changes the currently active 
+  ## branch, and only if its tracking branch is of the same name
+  default = simple
+
+[rerere]
+  ## Record any merge conflict resolutions and reuse them automatically
+  # enabled = true
+
+[alias]
+  ## Push submodules together with main repo
+  pushall = push --recurse-submodules=on-demand
+
+  ## Concise status
+  s = status -s
+
+  ## Succinct log with graph
+  lg = log --oneline --decorate --all --graph
+
+  ## Merge without fast-forward, for merging branches.
+  mnff = merge --no-ff
+  co = checkout
+  br = branch
