@@ -3,7 +3,7 @@
 This repository contains a collection of config files used for creating a baseline for developer cooperation.
 
 ## Git
-Place the `.gitconfig` file at the root of your home directory _prior_ to installing git.
+Place the [.gitconfig](https://github.com/Haaretz/htz-dotfiles/blob/master/.gitconfig) file at the root of your home directory _prior_ to installing git.
 
 After git is installed, open the command line and run:
 ```sh
