@@ -45,8 +45,11 @@
   ## Concise status
   s = status -s
   
+  ## Sync local with remote
+  up = "!git pull --prune && git submodule update --init --recursive"
+  
   ## Update before creating a new brach
-  nb = "!git pull --prune && git submodule update --init --recursive && git checkout -b"
+  nb = "!git up && git checkout -b"
   
   ## Merge without fast-forward, for merging branches.
   mnff = merge --no-ff
