@@ -19,16 +19,16 @@
 [merge]
   ## Make all merges no-ff
   # ff = false
-  
+
 [pull]
   ## Default pulls to fetch and rebase - not merge
   rebase = true
 
 [push]
-  ## Limit `push` to only pushing changes the currently active 
+  ## Limit `push` to only pushing changes the currently active
   ## branch, and only if its tracking branch is of the same name
   default = simple
-  
+
   ## Also push tags when pushing changes
   followTags = true
 
@@ -44,42 +44,58 @@
 
   ## Concise status
   s = status -s
-  
+
   ## Sync local with remote
   up = "!git pull --prune && git submodule update --init --recursive"
-  
+
+  ## Sync dev and return to current branch
+  updev = "!f() { \
+    local branch=$(git rev-parse --abbrev-ref HEAD); \
+    git checkout dev && \
+    git up && \
+    git checkout $branch; \
+  }; f"
+
+  ## Sync master and return to current branch
+  upmaster = "!f() { \
+    local branch=$(git rev-parse --abbrev-ref HEAD); \
+    git checkout master && \
+    git up && \
+    git checkout $branch; \
+  }; f"
+
   ## Update before creating a new brach
   nb = "!git up && git checkout -b"
-  
+
   ## Merge without fast-forward, for merging branches.
   mnff = merge --no-ff
-  
+
   ## Push submodules together with main repo
   pushall = push --recurse-submodules=on-demand
 
   ## Succinct log with graph
   lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-  
+
   ## Log changed files in each commit
   ls = log --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''%C(bold yellow)%s%C(reset) %C(dim white)- %an%C(reset)' --all --numstat
-  
+
   ## Show actual history of commits
   hist = log -p --
 
-  ## Find commits that containing a provided string. 
+  ## Find commits that containing a provided string.
   ## Takes a regular expression
   find = log --source --all -p -G
-  
-  
-  ## Delete all branches that were mereged into the current one                    
+
+
+  ## Delete all branches that were mereged into the current one
   delete-merged = !git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d
-  
+
   ## Unstage file(s) that have been added to the staging area  (Can optionally take a file name).
-  unstage = reset HEAD --     
-  
+  unstage = reset HEAD --
+
   ## Undo last commit (but don't change content of files on disk)
   undo = git reset --soft HEAD~1
 
   ## Diff staged files (Can optionally take a file name).
   diff-staged = diff -cached --
-  
+
