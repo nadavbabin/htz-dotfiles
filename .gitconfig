@@ -45,6 +45,12 @@
   ## Concise status
   s = status -s
 
+  ## Delete a branch locally and on origin
+  db = "!f() { \
+    git branch -d $1 && \
+    git push origin :$1; \
+  }; f"
+
   ## Sync local with remote
   up = "!git pull --prune && git submodule update --init --recursive"
 
