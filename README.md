@@ -3,20 +3,10 @@
 This repository contains a collection of config files used for creating a baseline for developer cooperation.
 
 ## Git
-Place the [.gitconfig](https://github.com/Haaretz/htz-dotfiles/blob/master/.gitconfig) file at the root of your home directory _prior_ to installing git.
+Clone the repo and dun the `.instConf` script and answer the prompts.
 
-After git is installed, open the command line and run:
-```sh
-git config --global user.email "<your-email-here>"
-git config --global user.name "<your github name here>"
-```
-
-And then run 
-```sh
- git config --global user.email && git config --global user.name
-```
-
-To varify the settings.
+A `.gitconfig` file will be written to your home direrctory. If one already existed, it will be 
+backed up as `old.gitconfig`
 
 ## Editorconfig
 EditorConfig helps developers define and maintain consistent coding styles between different editors, IDEs and computers. 
