@@ -1,3 +1,7 @@
+[user]
+  name = <%= userName %>
+  email = <%= email %>
+
 [init]
   ## Templates directory (for git hooks, etc)
   # templatedir = ~/.git_template
@@ -6,8 +10,7 @@
   excludesfile = ~/.gitignore
 
   ## Handle line endings
-  # autocrlf = input # Use this on linux/mac
-  # autocrlf = true # Use this on windows
+  autocrlf = <%= crlf %>
 
   ## Only show messages in a pager if longer than one screen
   pager = less -+F -+X
