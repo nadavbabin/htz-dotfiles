@@ -83,7 +83,7 @@
   pushall = push --recurse-submodules=on-demand
 
   ## Succinct log with graph
-  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(magenta)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 
   ## Log changed files in each commit
   ls = log --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''%C(bold yellow)%s%C(reset) %C(dim white)- %an%C(reset)' --all --numstat
