@@ -1,21 +1,27 @@
 # Haaretz Config Files
 
-This repository contains a collection of config files used for creating a baseline for developer cooperation.
+This repository contains a collection of configuration files used for creating 
+a baseline for developer cooperation.
 
 ## Git
-Clone the repo and dun the `.instConf` script and answer the prompts.
+Clone the repo, run the `installGitConf` script and answer the prompts.
 
-A `.gitconfig` file will be written to your home direrctory. If one already existed, it will be 
-backed up as `old.gitconfig`
+A `.gitconfig` file will be written to your home directory. If one already 
+existed, it will be backed up as `old.gitconfig`
+
+The `installCompletions` script will automatically setup git commands and 
+branch name auto completion for bash.
 
 ## Editorconfig
-EditorConfig helps developers define and maintain consistent coding styles between different editors, IDEs and computers. 
-Additionally, it helps minimizing redundent whitespace diffs in version control systems, which are simply caused by differences
-in editor settings.
+EditorConfig helps developers define and maintain consistent coding styles 
+between different editors, IDEs and computers. Additionally, it helps minimizing 
+redundant whitespace diffs in version control systems, which are simply caused 
+by differences in editor settings.
 
-To maintain consistency, each repository should contain an `.editorconfig` file identical to the one in this repo, at its root.
+To maintain consistency, each repository should contain an `.editorconfig` file 
+identical to the one in this repository, at its root.
 
-Editorconfig plugins are available for all major IDEs and text editors:
+EditorConfig plugins are available for all major IDEs and text editors:
 - [WebStorm](https://www.jetbrains.com/help/webstorm/2016.1/configuring-code-style.html#editorconfig)
 - [InteliJ IDEA](https://www.jetbrains.com/help/idea/2016.1/code-style.html#EditorConfig)
 - [Eclipse](https://github.com/ncjones/editorconfig-eclipse): https://github.com/ncjones/editorconfig-eclipse
