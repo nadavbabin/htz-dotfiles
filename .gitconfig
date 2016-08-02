@@ -57,14 +57,6 @@
   ## Sync local with remote
   up = "!git pull --prune && git submodule update --init --recursive"
 
-  ## Sync dev and return to current branch
-  updev = "!f() { \
-    local branch=$(git rev-parse --abbrev-ref HEAD); \
-    git checkout dev && \
-    git up && \
-    git checkout $branch; \
-  }; f"
-
   ## Sync master and return to current branch
   upmaster = "!f() { \
     local branch=$(git rev-parse --abbrev-ref HEAD); \
@@ -73,10 +65,11 @@
     git checkout $branch; \
   }; f"
 
-  ## Update before creating a new brach
+  ## Update before creating a new branch
   nb = "!git up && git checkout -b"
 
   ## Merge without fast-forward, for merging branches.
+  mb = merge --no-ff
   mnff = merge --no-ff
 
   ## Push submodules together with main repo
@@ -89,15 +82,27 @@
   ls = log --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''%C(bold yellow)%s%C(reset) %C(dim white)- %an%C(reset)' --all --numstat
 
   ## Show actual history of commits
-  hist = log -p --
+  hist = log -p --follow --
 
-  ## Find commits that containing a provided string.
+  ## Find commits containing a provided string in the changed source files.
   ## Takes a regular expression
   find = log --source --all -p -G
 
-
   ## Delete all branches that were mereged into the current one
-  delete-merged = !git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d
+  delete-merged = !git delete-merged-local && git delete-merged-remote
+
+  delete-merged-local = "!f() { \
+    if [ `git branch --merged | grep -v \"\\*\" | grep -v master | grep -v dev | grep -v \"release/\"` ]; then \
+      git branch --merged | grep -v \"\\*\" | grep -v master | grep -v dev | grep -v \"release/\" | xargs -n 1 git branch -d; \
+    fi \
+  }; f"
+
+  delete-merged-remote = "!f() { \
+    if [ `git branch -r --merged | grep -v \"\\*\" | grep -v master | grep -v dev | grep -v \"release/\"` ]; then \
+      git branch -r --merged | grep -v \"\\*\" | grep -v master | grep -v dev | grep -v \"release/\" | sed 's|origin/||' | xargs -n 1 git push --delete origin; \
+    fi \
+  }; f"
+
 
   ## Unstage file(s) that have been added to the staging area  (Can optionally take a file name).
   unstage = reset HEAD --
@@ -108,3 +113,13 @@
   ## Diff staged files (Can optionally take a file name).
   diff-staged = diff -cached --
 
+  ## Checkout the latest release
+  last-release = !git fetch --tags && git checkout $(git describe --tags `git rev-list --tags --max-count=1`)
+
+  ## Create a new hotfix branch
+  hotfix = ! git last-release -q && echo Creating new hotfix branch from $(git describe --tags `git rev-list --tags --max-count=1`) && git checkout -b
+
+  feature = !git checkout master && git up && git checkout -b
+
+  ## Clean working directory from untracked files
+  clean = git clean -fd
