@@ -23,9 +23,9 @@ if ! (( $(grep -c "~/.git-completion.bash" ~/.bashrc) )); then
 
   if [ $completions ]; then
     \cp -f ./git-completion.bash ~/.git-completion.bash
-    echo "if [ -f ~/.git-completion.bash  ]; then" >> .bashrc
-    echo "  source ~/.git-completion.bash" >> .bashrc
-    echo "fi" >> .bashrc
+    echo "if [ -f ~/.git-completion.bash  ]; then" >> ~/.bashrc
+    echo "  source ~/.git-completion.bash" >> ~/.bashrc
+    echo "fi" >> ~/.bashrc
   fi
 fi
 
@@ -44,9 +44,9 @@ if ! (( $(grep -c "~/.git-prompt.sh" ~/.bashrc) )); then
   if [ $prompt ]; then
     \cp -f ./git-propmt.sh ~/.git-prompt.sh
 
-    echo "if [ -f ~/.git-prompt.sh  ]; then" >> .bashrc
-    echo "  source ~/.git-prompt.sh" >> .bashrc
-    echo "  PS1='[\u@\h \W\$(__git_ps1 \" (%s)\")]\$ '" >> .bashrc
-    echo "fi" >> .bashrc
+    echo "if [ -f ~/.git-prompt.sh  ]; then" >> ~/.bashrc
+    echo "  source ~/.git-prompt.sh" >> ~/.bashrc
+    echo "  PS1='[\u@\h \W\$(__git_ps1 \" (%s)\")]\$ '" >> ~/.bashrc
+    echo "fi" >> ~/.bashrc
   fi
 fi
