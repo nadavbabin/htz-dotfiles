@@ -6,8 +6,8 @@ magenta=$(tput setaf 203)
 cyan=$(tput setaf 6)
 normal=$(tput sgr0)
 
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ./
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-propmt.sh -o ./
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ./git-completion.bash
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-propmt.sh -o ./git-propmt.sh
 
 if ! (( $(grep -c "~/.git-completion.bash" ~/.bashrc) )); then
   read -p "${cyan}Would you like to install git auto completion for bash?${normal} [y/N]" complResp
