@@ -7,7 +7,6 @@ cyan=$(tput setaf 6)
 normal=$(tput sgr0)
 
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ./git-completion.bash
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ./git-propmt.sh
 
 if ! (( $(grep -c "~/.git-completion.bash" ~/.bashrc) )); then
