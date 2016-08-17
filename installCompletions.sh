@@ -7,7 +7,8 @@ cyan=$(tput setaf 6)
 normal=$(tput sgr0)
 
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ./git-completion.bash
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-propmt.sh -o ./git-propmt.sh
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ./git-propmt.sh
 
 if ! (( $(grep -c "~/.git-completion.bash" ~/.bashrc) )); then
   read -p "${cyan}Would you like to install git auto completion for bash?${normal} [y/N]" complResp
@@ -23,6 +24,8 @@ if ! (( $(grep -c "~/.git-completion.bash" ~/.bashrc) )); then
 
   if [ $completions ]; then
     \cp -f ./git-completion.bash ~/.git-completion.bash
+    echo "" >> ~/.bashrc
+    echo "# Git auto completion" >> ~/.bashrc
     echo "if [ -f ~/.git-completion.bash  ]; then" >> ~/.bashrc
     echo "  source ~/.git-completion.bash" >> ~/.bashrc
     echo "fi" >> ~/.bashrc
@@ -43,7 +46,8 @@ if ! (( $(grep -c "~/.git-prompt.sh" ~/.bashrc) )); then
 
   if [ $prompt ]; then
     \cp -f ./git-propmt.sh ~/.git-prompt.sh
-
+    echo "" >> ~/.bashrc
+    echo "# Git prompt" >> ~/.bashrc
     echo "if [ -f ~/.git-prompt.sh  ]; then" >> ~/.bashrc
     echo "  source ~/.git-prompt.sh" >> ~/.bashrc
     echo "  PS1='[\u@\h \W\$(__git_ps1 \" (%s)\")]\$ '" >> ~/.bashrc
