@@ -44,6 +44,7 @@
   cm = commit
   br = branch
   cp = cherry-pick
+  a = add
 
   ## Concise status
   s = status -s
@@ -67,10 +68,12 @@
 
   ## Update before creating a new branch
   nb = "!git up && git checkout -b"
+  new-branch = "!git nb"
 
   ## Merge without fast-forward, for merging branches.
-  mb = merge --no-ff
   mnff = merge --no-ff
+  mb = "!git mnff"
+  merge-branch = "!git mnff"
 
   ## Push submodules together with main repo
   pushall = push --recurse-submodules=on-demand
@@ -88,9 +91,6 @@
   ## Takes a regular expression
   find = log --source --all -p -G
 
-  ## Delete all branches that were mereged into the current one
-  delete-merged = !git delete-merged-local && git delete-merged-remote
-
   delete-merged-local = "!f() { \
     if [ `git branch --merged | grep -v \"\\*\" | grep -v master | grep -v dev | grep -v \"release/\"` ]; then \
       git branch --merged | grep -v \"\\*\" | grep -v master | grep -v dev | grep -v \"release/\" | xargs -n 1 git branch -d; \
@@ -103,6 +103,8 @@
     fi \
   }; f"
 
+  ## Delete all branches that were mereged into the current one
+  delete-merged = !git delete-merged-local && git delete-merged-remote
 
   ## Unstage file(s) that have been added to the staging area  (Can optionally take a file name).
   unstage = reset HEAD --
@@ -114,12 +116,29 @@
   diff-staged = diff -cached --
 
   ## Checkout the latest release
-  last-release = !git fetch --tags && git checkout $(git describe --tags `git rev-list --tags --max-count=1`)
+  last-release = "!f() { \
+    git fetch --tags && \
+    git checkout $(git describe --tags `git rev-list --tags --max-count=1`); \
+  }; f"
 
   ## Create a new hotfix branch
-  hotfix = ! git last-release -q && echo Creating new hotfix branch from $(git describe --tags `git rev-list --tags --max-count=1`) && git checkout -b
+  hotfix = "!f(){ \
+    git last-release -q  && \
+    printf \"\nCreating new hotfix branch from $(git describe --tags `git rev-list --tags --max-count=1`)\n\" && \
+    git checkout -b hotfix/$1; \
+  }; f"
 
-  feature = !git checkout master && git up && git checkout -b
+  feature = "!f() { \
+    git checkout master && \
+    git up && \
+    git checkout -b feature/$1;\
+  }; f"
+
+  release = "!f() { \
+    git checkout master && \
+    git up && \
+    git checkout -b release/$1;\
+  }; f"
 
   ## Clean working directory from untracked files
   clean = git clean -fd
