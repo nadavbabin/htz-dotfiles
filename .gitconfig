@@ -142,3 +142,28 @@
 
   ## Clean working directory from untracked files
   clean = git clean -fd
+
+  ## Create a temporary working tree for making quick changes while working on a branch
+  temp-tree = "!f() { \
+    cyan=$(tput setaf 14); \
+    magenta=$(tput setaf 1); \
+    gray=$(tput setaf 248); \
+    normal=$(tput sgr0); \
+    if [ -z \"$1\" ]; then \
+      printf \"\n${magenta}Error:${cyan} A name for the new branch must be provided as the first argument${normal}\n\" 1>&2;\
+      printf \"\n${magenta}Usage:${normal} git temp-tree ${gray}<new-branch> <path> [<base-branch]${normal}\n\n       ${gray}When base-branch is not provided, \"master\" will be used by default${normal}\n\"; \
+      exit 1; \
+    fi; \
+    if [ -z \"$2\" ]; then \
+      printf \"\n${magenta}Error:${cyan} A path for the new worktree must be provided as the second argument${normal}\n\" 1>&2;\
+      printf \"\n${magenta}Usage:${normal} git temp-tree ${gray}<new-branch> <path> [<base-branch]${normal}\n\n       ${gray}When base-branch is not provided, \"master\" will be used by default${normal}\n\"; \
+      exit 1; \
+    fi;\
+    if [ -z \"$3\" ]; then \
+      path='master'; \
+    else \
+      path=$3; \
+    fi;\
+    git worktree add -b $1 $2 $path && \
+    cd $2; \
+   }; f"
