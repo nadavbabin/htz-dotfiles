@@ -128,10 +128,11 @@
     git checkout -b hotfix/$1; \
   }; f"
 
-  feature = "!f() { \
+ feature = "!f() { \
+    cleartext=$(sed 's/ /-/g' <<<$@) && \
     git checkout master && \
     git up && \
-    git checkout -b feature/$1;\
+    git checkout -b feature/$cleartext;\
   }; f"
 
   release = "!f() { \
