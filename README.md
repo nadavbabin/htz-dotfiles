@@ -1,4 +1,4 @@
-# Haaretz Config Files
+# Config Files
 
 This repository contains a collection of configuration files used for creating 
 a baseline for developer cooperation.
